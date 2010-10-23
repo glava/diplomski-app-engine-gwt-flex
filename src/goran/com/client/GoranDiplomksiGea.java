@@ -23,7 +23,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 public class GoranDiplomksiGea implements EntryPoint {
 	/**
 	 * The message displayed to the user when the server cannot be reached or
-	 * returns an error.
+	 * returns an error. new comment
 	 */
 	private static final String SERVER_ERROR = "An error occurred while "
 			+ "attempting to contact the server. Please check your network "
