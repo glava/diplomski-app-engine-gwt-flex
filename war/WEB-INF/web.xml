@@ -10,6 +10,12 @@
     <servlet-name>greetServlet</servlet-name>
     <servlet-class>goran.com.server.GreetingServiceImpl</servlet-class>
   </servlet>
+  
+  <servlet>
+    <servlet-name>loginServlet</servlet-name>
+    <servlet-class>goran.com.server.LoginServiceImpl</servlet-class>
+  </servlet>
+  
   <servlet>
     <servlet-name>saveUser</servlet-name>
     <servlet-class>goran.com.server.saveUser</servlet-class>
@@ -18,6 +24,11 @@
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
     <url-pattern>/gorandiplomksigea/greet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>loginServlet</servlet-name>
+    <url-pattern>/gorandiplomksigea/login</url-pattern>
   </servlet-mapping>
   
   <servlet-mapping>
