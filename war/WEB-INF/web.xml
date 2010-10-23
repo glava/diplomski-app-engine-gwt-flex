@@ -10,15 +10,24 @@
     <servlet-name>greetServlet</servlet-name>
     <servlet-class>goran.com.server.GreetingServiceImpl</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>saveUser</servlet-name>
+    <servlet-class>goran.com.server.saveUser</servlet-class>
+  </servlet>
   
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
     <url-pattern>/gorandiplomksigea/greet</url-pattern>
   </servlet-mapping>
   
+  <servlet-mapping>
+    <servlet-name>saveUser</servlet-name>
+    <url-pattern>/saveUser</url-pattern>
+  </servlet-mapping>
+  
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>GoranDiplomksiGea.html</welcome-file>
+    <welcome-file>index.html</welcome-file>
   </welcome-file-list>
 
 </web-app>
