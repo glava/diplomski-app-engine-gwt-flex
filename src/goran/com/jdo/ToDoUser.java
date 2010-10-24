@@ -20,9 +20,7 @@ public class ToDoUser {
 	private String username;
 	@Persistent
 	private String password;
-	 @Persistent
-	private ArrayList<String> favoriteFoods;
-	
+
 	 public ToDoUser(String username, String pasword){
 		this.username = username;
 		this.password = pasword;
@@ -52,12 +50,5 @@ public class ToDoUser {
 		return password;
 	}
 
-	public void setFavoriteFoods(ArrayList<String> favoriteFoods) {
-		this.favoriteFoods = favoriteFoods;
-	}
-
-	public ArrayList<String> getFavoriteFoods() {
-		return favoriteFoods;
-	}
 	
 }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600">
+	<fx:Declarations>
+		<s:RemoteObject id="data" destination="Data" fault="data_faultHandler(event)">
+			<mx:method name="createData" result="{resultEvent(event)}"/>
+		</s:RemoteObject>
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.ResultEvent;
+			public function resultEvent(evt:ResultEvent):void
+			{
+				trace("");
+			}
+			
+			protected function btnConnect_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				data.login(username.text,password.text);
+			}
+			
+
+			protected function data_faultHandler(event:FaultEvent):void
+			{
+			}
+
+		]]>
+	</fx:Script>
+	<s:VGroup horizontalCenter="0" verticalCenter="0">
+		<s:TextArea id="username" width="120" height="10"/>
+		<s:TextArea id="password" width="120" height="10"/>
+		<s:Button label="login" id="btnConnect" click="btnConnect_clickHandler(event)"/>
+		
+	</s:VGroup>
+	
+</s:Application>
