@@ -16,7 +16,7 @@ public class Data {
 
 		Boolean loggedIn = false;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-
+		
 		ToDoUser newToDoUser = pm.getObjectById(ToDoUser.class, username);
 		if (newToDoUser != null) {
 			if (newToDoUser.getPassword().equals(password)) {

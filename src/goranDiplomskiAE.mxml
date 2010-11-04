@@ -1,39 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
-			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600">
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600"
+			   initialize="application1_initializeHandler(event)"
+			   >
 	<fx:Declarations>
 		<s:RemoteObject id="data" destination="Data" fault="data_faultHandler(event)">
-			<mx:method name="createData" result="{resultEvent(event)}"/>
+			<mx:method name="login" result="{resultEvent(event)}"/>
 		</s:RemoteObject>
+		
+		<mx:HTTPService id="checkSession"
+						url="{Globals.CHECK_SESSION_SERVLET}"
+						method="GET"
+						resultFormat="e4x"
+						fault="checkSession_faultHandler(event)"
+						result="checkSession_resultHandler(event)" />
+		<mx:HTTPService id="loginUser"
+						url="{Globals.LOGIN_USER_SERVLET}"
+						method="GET"
+						resultFormat="e4x"
+						fault="loginUser_faultHandler(event)"
+						result="loginUser_resultHandler(event)" >
+					<mx:request xmlns="">
+						<username>{username.text}</username>
+						<password>{password.text}</password>
+					</mx:request>
+		</mx:HTTPService>
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
+			import flex.Globals;
+			
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
 			import mx.rpc.events.FaultEvent;
 			import mx.rpc.events.ResultEvent;
 			public function resultEvent(evt:ResultEvent):void
 			{
-				trace("");
+				status.text = "Login";
 			}
 			
 			protected function btnConnect_clickHandler(event:MouseEvent):void
 			{
-				// TODO Auto-generated method stub
-				data.login(username.text,password.text);
+				loginUser.send();
 			}
-			
-
 			protected function data_faultHandler(event:FaultEvent):void
 			{
+				
+			}
+
+			protected function loginUser_resultHandler(event:ResultEvent):void
+			{
+				if(event.result != null)
+				{
+					var xml:XML=event.result as XML;
+					if(xml == "success")
+					{
+						status.text = "uspeh";
+					}
+				}
+			}
+
+
+			protected function loginUser_faultHandler(event:FaultEvent):void
+			{
+				status.text = "fault- fault";
+			}
+
+
+			protected function checkSession_faultHandler(event:FaultEvent):void
+			{
+				status.text = "fault- fault";
+			}
+
+
+			protected function checkSession_resultHandler(event:ResultEvent):void
+			{
+				if(event.result != null)
+				{
+					var xml:XML=event.result as XML;
+					xml.result = "success";
+				}
+			}
+
+
+			protected function application1_initializeHandler(event:FlexEvent):void
+			{
+				checkSession.send();
 			}
 
 		]]>
 	</fx:Script>
+	
 	<s:VGroup horizontalCenter="0" verticalCenter="0">
-		<s:TextArea id="username" width="120" height="10"/>
-		<s:TextArea id="password" width="120" height="10"/>
+		<s:TextArea id="username" width="120" height="20" />
+		<s:TextArea id="password" width="120" height="20" />
 		<s:Button label="login" id="btnConnect" click="btnConnect_clickHandler(event)"/>
 		
+		<s:Label id="status" width="120" height="20" text=""/>
 	</s:VGroup>
 	
 </s:Application>
