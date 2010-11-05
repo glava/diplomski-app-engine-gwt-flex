@@ -1,5 +1,6 @@
 package goran.com.server;
 
+import goran.com.jdo.ToDo;
 import goran.com.jdo.ToDoUser;
 
 import javax.jdo.PersistenceManager;
@@ -25,6 +26,15 @@ public class Data {
 			}
 		}
 		return null;
+	}
+	
+	public boolean createToDo(ToDoUser toDoUser)
+	{
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		ToDoUser logedInUser = pm.getObjectById(ToDoUser.class, toDoUser.getUsername());
+		logedInUser.setToDoTasks(toDoUser.getToDoTasks());
+		pm.makePersistent(logedInUser);
+		return true;
 	}
 	
 }

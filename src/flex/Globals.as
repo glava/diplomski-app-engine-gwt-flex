@@ -1,4 +1,4 @@
-package flex
+package 
 {
 	public class Globals
 	{

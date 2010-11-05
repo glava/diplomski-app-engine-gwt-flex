@@ -6,24 +6,26 @@ import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
-
 import com.google.appengine.api.datastore.Key;
 
 @PersistenceCapable
 public class ToDoUser {
-	   
+
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	private Key key;
-	
-	@Persistent
-	private String username;
-	@Persistent
-	private String password;
 
-	 public ToDoUser(String username, String pasword){
+	@Persistent
+	public String username;
+	@Persistent
+	public String password;
+	@Persistent
+	public ArrayList<ToDo> toDoTasks;
+
+	public ToDoUser(String username, String pasword) {
 		this.username = username;
 		this.password = pasword;
+		toDoTasks = new ArrayList<ToDo>();
 	}
 
 	public void setKey(Key key) {
@@ -50,5 +52,12 @@ public class ToDoUser {
 		return password;
 	}
 
-	
+	public void setToDoTasks(ArrayList<ToDo> toDoTasks) {
+		this.toDoTasks = toDoTasks;
+	}
+
+	public ArrayList<ToDo> getToDoTasks() {
+		return toDoTasks;
+	}
+
 }

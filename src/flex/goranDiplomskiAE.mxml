@@ -29,7 +29,6 @@
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
-			import flex.Globals;
 			
 			import mx.controls.Alert;
 			import mx.events.FlexEvent;
