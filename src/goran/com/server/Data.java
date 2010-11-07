@@ -1,7 +1,12 @@
 package goran.com.server;
 
+import java.util.ArrayList;
+
+import goran.com.jdo.Tag;
 import goran.com.jdo.ToDo;
 import goran.com.jdo.ToDoUser;
+import goran.com.model.ToDoUserVo;
+import goran.com.model.ToDoVo;
 
 import javax.jdo.PersistenceManager;
 
@@ -20,7 +25,7 @@ public class Data {
 		
 		ToDoUser newToDoUser = pm.getObjectById(ToDoUser.class, username);
 		if (newToDoUser != null) {
-			if (newToDoUser.getPassword().equals(password)) {
+			if (newToDoUser.password.equals(password)) {
 				loggedIn = true;
 				return newToDoUser;
 			}
@@ -28,12 +33,9 @@ public class Data {
 		return null;
 	}
 	
-	public boolean createToDo(ToDoUser toDoUser)
+	public boolean createToDo(ToDoUserVo toDoUserVo,ToDoVo toDoVo)
 	{
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		ToDoUser logedInUser = pm.getObjectById(ToDoUser.class, toDoUser.getUsername());
-		logedInUser.setToDoTasks(toDoUser.getToDoTasks());
-		pm.makePersistent(logedInUser);
 		return true;
 	}
 	

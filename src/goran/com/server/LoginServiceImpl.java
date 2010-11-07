@@ -28,7 +28,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements
 
 		ToDoUser newToDoUser = pm.getObjectById(ToDoUser.class, username);
 		if (newToDoUser != null) {
-			if (newToDoUser.getPassword().equals(password)) {
+			if (newToDoUser.password.equals(password)) {
 				loggedIn = true;
 				session.setAttribute("user", newToDoUser);
 			}

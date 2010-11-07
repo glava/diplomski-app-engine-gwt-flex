@@ -1,11 +1,14 @@
 package goran.com.jdo;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.jdo.annotations.Element;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+
 import com.google.appengine.api.datastore.Key;
 
 @PersistenceCapable
@@ -19,14 +22,14 @@ public class ToDoUser {
 	public String username;
 	@Persistent
 	public String password;
-	@Persistent
-	public ArrayList<ToDo> toDoTasks;
+	
+	@Persistent(mappedBy = "user",defaultFetchGroup = "true")
+    @Element(dependent = "true")
+	public List<ToDo> toDoTasks = new ArrayList<ToDo>();;
 
-	public ToDoUser(String username, String pasword) {
-		this.username = username;
-		this.password = pasword;
-		toDoTasks = new ArrayList<ToDo>();
-	}
+	@Persistent(mappedBy = "user",defaultFetchGroup = "true")
+    @Element(dependent = "true")
+	public List<Tag> tags = new ArrayList<Tag>();
 
 	public void setKey(Key key) {
 		this.key = key;
@@ -34,30 +37,6 @@ public class ToDoUser {
 
 	public Key getKey() {
 		return key;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setToDoTasks(ArrayList<ToDo> toDoTasks) {
-		this.toDoTasks = toDoTasks;
-	}
-
-	public ArrayList<ToDo> getToDoTasks() {
-		return toDoTasks;
 	}
 
 }

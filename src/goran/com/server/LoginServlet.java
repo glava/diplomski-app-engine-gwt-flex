@@ -16,14 +16,16 @@ public class LoginServlet extends HttpServlet {
 		resp.setContentType("text/plain");
 		
 		Boolean loggedIn = false;
-		String username = (String) req.getParameter("username");
-		String password = (String) req.getParameter("password");
+		String username = "goran1";
+		String password = "123";
+//		String username = (String) req.getParameter("username");
+//		String password = (String) req.getParameter("password");
 		HttpSession session = req.getSession();
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		
 		ToDoUser newToDoUser = pm.getObjectById(ToDoUser.class, username);
 		if (newToDoUser != null) {
-			if (newToDoUser.getPassword().equals(password)) {
+			if (newToDoUser.password.equals(password)) {
 				loggedIn = true;
 				session.setAttribute("user", newToDoUser);
 			}
