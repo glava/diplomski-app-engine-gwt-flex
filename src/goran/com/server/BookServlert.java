@@ -46,9 +46,9 @@ public class BookServlert extends HttpServlet {
 		tag.name = "posao";
 		TagVo tag1 = new TagVo();
 		tag1.name = "kuca";
-		toDoVo.tags = new ArrayList<TagVo>();
-		toDoVo.tags.add(tag);
-		toDoVo.tags.add(tag1);
+//		toDoVo.tags = new ArrayList<TagVo>();
+//		toDoVo.tags.add(tag);
+//		toDoVo.tags.add(tag1);
 		toDoVo.toDoMsg = "uradi nešto debilu";
 //		MOCKING THE ToUserVo
 		ToDoUserVo toDoUserVo = new ToDoUserVo();

@@ -15,16 +15,52 @@
     <servlet-name>loginServlet</servlet-name>
     <servlet-class>goran.com.server.LoginServiceImpl</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>checkSession</servlet-name>
+    <servlet-class>goran.com.server.CheckSession</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>book</servlet-name>
+    <servlet-class>goran.com.server.BookServlert</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>listBook</servlet-name>
+    <servlet-class>goran.com.server.ListBookServlert</servlet-class>
+  </servlet>
   
   <servlet>
     <servlet-name>saveUser</servlet-name>
-    <servlet-class>goran.com.server.saveUser</servlet-class>
+    <servlet-class>goran.com.server.SaveUser</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>login</servlet-name>
+    <servlet-class>goran.com.server.LoginServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>logout</servlet-name>
+    <servlet-class>goran.com.server.LogoutServlet</servlet-class>
+  </servlet>
+
   
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
     <url-pattern>/gorandiplomksigea/greet</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>checkSession</servlet-name>
+    <url-pattern>/check</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>book</servlet-name>
+    <url-pattern>/book</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>listBook</servlet-name>
+    <url-pattern>/list</url-pattern>
+  </servlet-mapping>
+  
   
   <servlet-mapping>
     <servlet-name>loginServlet</servlet-name>
@@ -32,9 +68,45 @@
   </servlet-mapping>
   
   <servlet-mapping>
-    <servlet-name>saveUser</servlet-name>
-    <url-pattern>/saveUser</url-pattern>
+    <servlet-name>login</servlet-name>
+    <url-pattern>/login</url-pattern>
   </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>logout</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>saveUser</servlet-name>
+    <url-pattern>/save</url-pattern>
+  </servlet-mapping>
+  <!-- GraniteDS -->
+	<!-- Read services-config.xml file at web application startup -->
+	<listener>
+		<listener-class>org.granite.config.GraniteConfigListener</listener-class>
+	</listener>
+
+	<!-- Handle AMF requests ([de]serialization) -->
+	<filter>
+		<filter-name>AMFMessageFilter</filter-name>
+		<filter-class>org.granite.messaging.webapp.AMFMessageFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>AMFMessageFilter</filter-name>
+		<url-pattern>/graniteamf/*</url-pattern>
+	</filter-mapping>
+
+	<!-- Handle AMF requests (execution) -->
+	<servlet>
+		<servlet-name>AMFMessageServlet</servlet-name>
+		<servlet-class>org.granite.messaging.webapp.AMFMessageServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AMFMessageServlet</servlet-name>
+		<url-pattern>/graniteamf/*</url-pattern>
+	</servlet-mapping>
   
   <!-- Default page to serve -->
   <welcome-file-list>

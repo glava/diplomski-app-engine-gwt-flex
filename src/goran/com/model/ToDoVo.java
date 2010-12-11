@@ -8,5 +8,4 @@ public class ToDoVo {
 	public String toDoMsg;
 	public Date date;
 	public int priority;
-	public ArrayList<TagVo> tags;
 }

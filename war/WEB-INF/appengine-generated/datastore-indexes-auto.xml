@@ -1,4 +1,10 @@
-<!-- Indices written at Sat, 23 Oct 2010 15:18:30 UTC -->
+<!-- Indices written at Sat, 11 Dec 2010 13:34:28 UTC -->
 
-<datastore-indexes/>
+<datastore-indexes>
 
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="ToDo" ancestor="true" source="auto">
+        <property name="toDoTasks_INTEGER_IDX" direction="asc"/>
+    </datastore-index>
+
+</datastore-indexes>

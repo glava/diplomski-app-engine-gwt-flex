@@ -27,9 +27,9 @@ public class ToDoUser {
     @Element(dependent = "true")
 	public List<ToDo> toDoTasks = new ArrayList<ToDo>();;
 
-	@Persistent(mappedBy = "user",defaultFetchGroup = "true")
-    @Element(dependent = "true")
-	public List<Tag> tags = new ArrayList<Tag>();
+//	@Persistent(mappedBy = "user",defaultFetchGroup = "true")
+//    @Element(dependent = "true")
+//	public List<Tag> tags = new ArrayList<Tag>();
 
 	public void setKey(Key key) {
 		this.key = key;
