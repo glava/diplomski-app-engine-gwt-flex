@@ -73,9 +73,9 @@
     <!--- @copy spark.components.SkinnableContainer#contentGroup -->
     <s:Group id="contentGroup" left="0" right="0" top="0" bottom="0" minWidth="0" minHeight="0">
         <s:layout>
-            <s:BasicLayout/>
+            <s:VerticalLayout/>
         </s:layout>
-		<s:HGroup visible.loggedOut="true" includeInLayout.loggedOut="true" visible="true">
+		<s:HGroup includeIn="loggedOut">
 			<s:HGroup>
 				<s:Label text="username"/>
 				<s:TextInput id="txtUserName"/>
@@ -86,9 +86,10 @@
 			</s:HGroup>
 			<s:Button id="btnLogIn" label="come in!!"/>
 		</s:HGroup>
-		<s:HGroup visible.logedIn="true" includeInLayout.logedIn="true" visible="false">
-			<s:Label id="txtUsername"/>
-			<s:Label id="lblLogOut" buttonMode="true"/>
+		
+		<s:HGroup includeIn="logedIn">
+			<s:Label id="lblUsername" text="username"/>
+			<s:Label id="lblLogOut" text="logOut" buttonMode="true"/>
 		</s:HGroup>
 		
 		

@@ -70,10 +70,13 @@
     <!--- @copy spark.components.SkinnableContainer#contentGroup -->
     <s:Group id="contentGroup" left="0" right="0" top="0" bottom="0" minWidth="0" minHeight="0">
         <s:layout>
-            <s:HorizontalLayout/>
+            <s:HorizontalLayout gap="10" paddingLeft="20" paddingRight="20" paddingTop="0"/>
         </s:layout>
 		<s:Label id="title" text="ToDoLaa!!"/>
-		<view:LoginComponent skinClass="view.skins.LoginComponentSkin" height="100%" width="400"/>
+		<s:Group width="100%">
+			
+			<view:LoginComponent skinClass="view.skins.LoginComponentSkin" height="100%" width="400" right="100"/>
+		</s:Group>
     </s:Group>
 
 </s:Skin>

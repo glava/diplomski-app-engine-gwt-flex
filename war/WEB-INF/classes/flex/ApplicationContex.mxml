@@ -8,10 +8,12 @@
 			import control.CreateToDoCommand;
 			import control.GetAllToDoCommand;
 			import control.LoginCommand;
+			import control.SendHelpMailCommand;
 			import control.ToDoModelLocator;
 			import control.ToDoUserLocator;
 			
 			import events.LoginEvent;
+			import events.MailEvent;
 			import events.ToDoEvent;
 		]]>
 	</fx:Script>
@@ -22,6 +24,7 @@
 		<parsley:Object type="{ToDoUserLocator}"/>
 		<parsley:Object type="{CheckSessionCommand}"/>
 		<parsley:DynamicCommand type="{GetAllToDoCommand}" id="getAllCommand" selector="{ToDoEvent.GET_ALL_TODOS}"/>
+		<parsley:DynamicCommand type="{SendHelpMailCommand}" id="sendMail" selector="{MailEvent.SEND_HELP_MAIL}"/>
 		
 		<parsley:DynamicCommand type="{LoginCommand}" selector="{LoginEvent.LOGIN_USER}"/>
 	</fx:Declarations>

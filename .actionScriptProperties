@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<actionScriptProperties mainApplicationPath="goranDiplomskiAE.mxml" projectUUID="9d10ab78-210d-4ba0-80b5-1447f65fbc56" version="6">
-  <compiler additionalCompilerArguments="-services ../../war/WEB-INF/flex/services-config.xml" autoRSLOrdering="true" copyDependentFiles="true" fteInMXComponents="false" generateAccessible="true" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="war" rootURL="http://127.0.0.1:8888/" sourceFolderPath="src/flex" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
+<actionScriptProperties mainApplicationPath="ToDoLaa.mxml" projectUUID="baa70817-899c-40c3-9a29-4332bee89c07" version="6">
+  <compiler additionalCompilerArguments="-locale  -services &quot;war/WEB-INF/flex/services-config.xml&quot;" autoRSLOrdering="true" copyDependentFiles="true" fteInMXComponents="false" generateAccessible="true" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="war" sourceFolderPath="src/flex" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
     <compilerSourcePath/>
     <libraryPath defaultLinkType="0">
       <libraryPathEntry kind="4" path="">
@@ -13,8 +13,9 @@
     <sourceAttachmentPath/>
   </compiler>
   <applications>
-    <application path="goranDiplomskiAE.mxml"/>
     <application path="ToDoLaa.mxml"/>
+    <application path="flex/ToDoLaa.mxml"/>
+    <application path="goranDiplomksiAE.mxml"/>
   </applications>
   <modules/>
   <buildCSSFiles/>
