@@ -25,7 +25,7 @@ package control
 		{
 			trace();
 		}
-		public function onSessionFault(evt:ResultEvent):void
+		public function onSessionFault(evt:FaultEvent):void
 		{
 		   trace();	
 		}

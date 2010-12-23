@@ -6,6 +6,7 @@ package control
 	
 	import mx.rpc.AsyncToken;
 	import mx.rpc.Fault;
+	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.ResultEvent;
 	import mx.rpc.remoting.RemoteObject;
 
@@ -28,7 +29,7 @@ package control
 			toDoModel.currentUser = result.result as ToDoLaUser;
 		}
 		
-		public function error (fault:Fault) : void {
+		public function error (fault:FaultEvent) : void {
 			dispatcher(new LoginEvent(LoginEvent.LOGIN_USER_FAILED,null));
 		}
 	}

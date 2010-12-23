@@ -1,17 +1,10 @@
 package view
 {
 	import control.ToDoModelLocator;
-	
+	import events.MailEvent;
 	import events.ToDoEvent;
-	
 	import flash.events.Event;
-	
-	import mx.binding.utils.BindingUtils;
-	import mx.collections.ArrayCollection;
 	import mx.events.FlexEvent;
-	
-	import org.osmf.utils.BinarySearch;
-	
 	import spark.components.List;
 	import spark.components.SkinnableContainer;
 
@@ -27,6 +20,8 @@ package view
 		
 		[Inject]
 		public var toDoModelLocator:ToDoModelLocator;
+		[MessageDispatcher]
+		public var dispatcher:Function;
 		
 		public function ToDoViewComponent()
 		{
@@ -39,8 +34,13 @@ package view
 			super.partAdded(partName,instance);
 			if(instance == mainList)
 			{
-				
+				addEventListener("onIRSendMail",onSendMailClicked);
 			}
+		}
+		
+		public function onSendMailClicked(evt:Event):void
+		{
+			dispatcher(new MailEvent(MailEvent.SEND_HELP_MAIL,true));
 		}
 		
 		public function onPreinitialize(evt:Event):void
