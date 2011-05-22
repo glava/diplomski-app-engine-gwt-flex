@@ -99,15 +99,17 @@
 					  maintainAspectRatio="false"/>
 		</s:Group>
 		<s:HGroup gap="10"
-				  paddingLeft="20"
-				  paddingRight="20"
+				  height="100%"
+				  width="1250"
+				  horizontalCenter="50"
+				  verticalAlign="middle"
 				  paddingTop="0">
 			<s:Label id="title"
+					 styleName="title"
 					 text="ToDoLaa!!"/>
 			<s:Group width="100%">
 				<view:LoginComponent skinClass="view.skins.LoginComponentSkin"
 									 height="100%"
-									 width="400"
 									 right="100"/>
 			</s:Group>
 		</s:HGroup>

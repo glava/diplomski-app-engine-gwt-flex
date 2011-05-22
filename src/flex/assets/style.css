@@ -1,0 +1,17 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+
+@font-face { 
+	src: url("assets/fonts/dadhand.ttf");
+	fontFamily: "dadhand";
+	advancedAntiAliasing: true;
+	embed-as-cff:true;
+}
+
+s|Label.title
+{
+	font-family:dadhand;
+	color:#000000;
+	font-size:20;
+}

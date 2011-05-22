@@ -24,12 +24,10 @@ package control
 		public function execute (event:AuthenticateUserEvent) : AsyncToken {
 			remoteObject = new RemoteObject("Data");
 			currentUser =event.toDoUser;
-			dispatcher(new AlertEvent(AlertEvent.SHOW_ALERT,"logujem se"));
 			return remoteObject.loginUser(event.toDoUser);
 		}
 		
 		public function result (result:ResultEvent) : void {
-			dispatcher(new AlertEvent(AlertEvent.SHOW_ALERT,"rezultat"));
 			if(result.result == null)
 			{
 				dispatcher(new AlertEvent(AlertEvent.SHOW_ALERT,"Neuspesno logovanja"));
@@ -41,8 +39,8 @@ package control
 		}
 		
 		public function error (fault:FaultEvent) : void {
-			/*dispatcher(new AuthenticateUserEvent(AuthenticateUserEvent.LOGIN_USER_FAILED,null));*/
-			dispatcher(new AlertEvent(AlertEvent.SHOW_ALERT,fault.fault.faultDetail));
+			
+			dispatcher(new AlertEvent(AlertEvent.SHOW_ALERT,"Neuspesno logovanja"));
 		}
 	}
 }

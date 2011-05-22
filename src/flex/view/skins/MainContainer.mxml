@@ -82,8 +82,8 @@
 				<s:SolidColor color="#3c5a76"/>
 			</s:fill>
 		</s:Rect>
-		<s:HGroup verticalAlign="top" gap="0"  horizontalAlign="center" horizontalCenter="0">
-				<view:CreatorComponent id="creatorComponent" skinClass="view.skins.CreatorComponentSkin"/>
+		<s:HGroup verticalAlign="top" gap="0"  horizontalAlign="center" horizontalCenter="0" height="100%">
+				<view:CreatorComponent id="creatorComponent" skinClass="view.skins.CreatorComponentSkin" />
 				<view:ToDoViewComponent id="toDoView" skinClass="view.skins.ToDoViewSkin"/>
 		</s:HGroup>
     </s:Group>

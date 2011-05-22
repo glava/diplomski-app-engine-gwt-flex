@@ -73,22 +73,9 @@ in accordance with the terms of the license agreement accompanying it.
 	more about it here: http://bugs.adobe.com/jira/browse/SDK-21143
 	-->
 	<!--- @copy spark.components.SkinnableContainer#contentGroup -->
-	<s:Group id="contentGroup"  minWidth="900" minHeight="650" width="900" height="490">
-		<s:Rect width="100%"
-				height="100%">
-			<s:fill>
-				<s:SolidColor color="0xffffff"
-				/>
-			</s:fill>
-		</s:Rect>
-		<s:Rect width="100%"
-				height="100%">
-			<s:fill>
-				<s:SolidColor color="0xe8e8e8"
-							  alpha="0.5"/>
-			</s:fill>
-		</s:Rect>
-		<s:Group>
+	<s:Group id="contentGroup"  minWidth="900" minHeight="650">
+		<components:BackgrounGroup/>
+		<s:Group width="100%">
 			<s:layout>
 				<s:VerticalLayout paddingTop="20" paddingLeft="20"/>
 			</s:layout>
@@ -98,7 +85,7 @@ in accordance with the terms of the license agreement accompanying it.
 				</s:layout>
 			</s:List>
 			<s:Group width="100%">
-				<s:Button id="btnSort" label="Sortiraj" right="285"/>
+				<s:Button id="btnSort" label="Sortiraj" right="375" visible="false"/>
 			</s:Group>	
 			<s:List id="doneList" itemRenderer="view.irenderer.ToDoItemRenderer" borderVisible="false" borderAlpha="0">
 				<s:layout>

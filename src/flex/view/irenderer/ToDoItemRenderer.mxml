@@ -1,128 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
-				xmlns:s="library://ns.adobe.com/flex/spark" 
-				xmlns:mx="library://ns.adobe.com/flex/mx" 
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009"
+				xmlns:s="library://ns.adobe.com/flex/spark"
+				xmlns:mx="library://ns.adobe.com/flex/mx"
 				height="30"
-				autoDrawBackground="false" xmlns:components="view.components.*">
-	
+				autoDrawBackground="false"
+				xmlns:components="view.components.*">
+
 	<fx:Script>
 		<![CDATA[
 			import model.ToDo;
-			
+
 			import mx.states.OverrideBase;
-			public var toDo:ToDo; 
-			
+			public var toDo:ToDo;
+
 			// Make the default background color white.
 			[Bindable]
-			public var myBGColor:int = 0xFFFFFF;
-			
+			public var myBGColor:int=0xFFFFFF;
+
 			// Override the itemIndex set function to draw a 
 			// white background behind even number items, 
 			// and a green background behind odd numbered items.
-			override public function set itemIndex(value:int):void { 
-				if ((value%2) == 0) {
-					myBGColor= 0xFFFFFF;
+			override public function set itemIndex(value:int):void
+			{
+				if ((value % 2) == 0)
+				{
+					myBGColor=0xFFFFFF;
 				}
-				if ((value%2) == 1) {
-					myBGColor= 0xFFFFFF;
+				if ((value % 2) == 1)
+				{
+					myBGColor=0xFFFFFF;
 					/* myBGColor= 0xCCFF66; */
 				}
 			}
-			
+
 			override public function set data(value:Object):void
 			{
-			
-				if(value != null)
+
+				if (value != null)
 				{
-				super.data = value;
-				toDo = value as ToDo;
-				itCheckBox.selected = toDo.done;
-				txtMsg.text = value.toDoMsg;
-				txtPriority.text = value.priority.toString();
-				
-				if(value.date != null)
-				txtDate.text = dateFormatter.format(value.date);
-				setFlagColor(toDo.priority);
+					super.data=value;
+					toDo=value as ToDo;
+					itCheckBox.selected=toDo.done;
+					txtMsg.text=value.toDoMsg;
+
+
+					if (value.date != null)
+						txtDate.text=dateFormatter.format(value.date);
+					setFlagColor(toDo.priority);
 				}
-				
+
 			}
+
 			override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
 			{
-				super.updateDisplayList(unscaledWidth,unscaledHeight);
-				if(toDo!=null)
+				super.updateDisplayList(unscaledWidth, unscaledHeight);
+				if (toDo != null)
 				{
 					setFlagColor(toDo.priority);
 				}
 			}
-				
+
 			private function setFlagColor(value:int):void
 			{
-				switch(value){
-					case 0: flag.color = styleManager.getColorName("red");	break;
-					case 1: flag.color = styleManager.getColorName("yellow");  break;
-					case 2: flag.color = styleManager.getColorName("green");  break;
+				switch (value)
+				{
+					case 0:
+						flag.color=styleManager.getColorName("red");
+						break;
+					case 1:
+						flag.color=styleManager.getColorName("yellow");
+						break;
+					case 2:
+						flag.color=styleManager.getColorName("green");
+						break;
 				}
 			}
-			
+
 			protected function itCheckBox_changeHandler(event:Event):void
 			{
-				toDo.done = itCheckBox.selected;
-				dispatchEvent(new Event("toDoRendererChange",true));
+				toDo.done=itCheckBox.selected;
+				dispatchEvent(new Event("toDoRendererChange", true));
 			}
 
 
 			protected function btnSendMail_clickHandler(event:MouseEvent):void
 			{
-				dispatchEvent(new Event("toDoRendererSendMail",true));
+				dispatchEvent(new Event("toDoRendererSendMail", true));
 			}
 
 
 			protected function btnDelete_clickHandler(event:MouseEvent):void
 			{
-				dispatchEvent(new Event("toDoRenderDelete",true));
+				dispatchEvent(new Event("toDoRenderDelete", true));
 			}
-
 		]]>
 	</fx:Script>
 	<fx:Declarations>
-		<mx:DateFormatter id="dateFormatter" formatString="DD. MM. YYYY"/>
+		<mx:DateFormatter id="dateFormatter"
+						  formatString="DD. MM. YYYY"/>
 	</fx:Declarations>
-	
-	<s:states> 
-		<s:State name="normal"/> 
-		<s:State name="hovered"/> 
-	</s:states> 
-	
-	<s:Rect id="myRect" 
-			left="0" right="0" top="0" bottom="0" 
-			bottomLeftRadiusX="85"
-			bottomLeftRadiusY="85"
-			topLeftRadiusY="85"
-			topLeftRadiusX="85"
-			alpha="1.0"> 
-		<s:stroke> 
-			<s:SolidColorStroke 
-				color="0xA8C6EE" 
-				weight="1"/> 
-		</s:stroke> 
-		<s:fill> 
-			<!-- Bind the myBGColor property to the fill color. -->
-			<s:SolidColor
-				color="{myBGColor}"/> 
-		</s:fill> 
-	</s:Rect>     
-	
-	<s:HGroup verticalAlign="middle" width="100%" gap="15" paddingTop="4" paddingLeft="5" paddingBottom="4" >
-		<s:CheckBox id="itCheckBox" change="itCheckBox_changeHandler(event)"/>
-		<s:Label id="txtMsg" height="20" width="400"  />
+
+	<s:states>
+		<s:State name="normal"/>
+		<s:State name="hovered"/>
+	</s:states>
+
+	<s:HGroup verticalAlign="middle"
+			  width="100%"
+			  gap="15"
+			  paddingTop="4"
+			  paddingLeft="5"
+			  paddingBottom="4">
+		<s:CheckBox id="itCheckBox"
+					change="itCheckBox_changeHandler(event)"/>
+		<s:Label id="txtMsg"
+				 height="20"
+				 width="400"/>
 		<components:PriorityFlag id="flag"/>
-		<s:Label id="txtPriority" height="20" />
-		<s:Label id="txtPriorityNum" height="20" />
-		<s:Label id="txtDate" height="20" width="70" />
-		<s:HGroup gap="5" width="100%" paddingRight="5">
-		<s:Button id="btnSendMail" label="Mail" click="btnSendMail_clickHandler(event)"/>
-		<s:Button id="btnDelete" label="X" click="btnDelete_clickHandler(event)"/>
+
+		<s:Label id="txtDate"
+				 height="20"
+				 width="70"/>
+		<s:HGroup gap="5"
+				  width="100%"
+				  paddingRight="5">
+			<s:Button id="btnSendMail"
+					  label="Mail"
+					  click="btnSendMail_clickHandler(event)"/>
+			<s:Button id="btnDelete"
+					  label="X"
+					  click="btnDelete_clickHandler(event)"/>
 		</s:HGroup>
 	</s:HGroup>
-	
+
 </s:ItemRenderer>

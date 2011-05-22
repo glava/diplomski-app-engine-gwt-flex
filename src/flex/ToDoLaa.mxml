@@ -88,6 +88,7 @@
 				<parsley:FlexConfig type="{ApplicationContex}"/>
 			</parsley:ContextBuilder>	
 	</fx:Declarations>
+	<fx:Style source="/assets/style.css"/>
 		
 	<s:layout>
 		<s:BasicLayout/>
