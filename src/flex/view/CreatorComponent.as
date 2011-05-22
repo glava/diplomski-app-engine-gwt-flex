@@ -1,4 +1,4 @@
-package view
+	package view
 {
 	import control.ToDoModelLocator;
 	
@@ -9,14 +9,16 @@ package view
 	
 	import model.ToDo;
 	
+	import mx.collections.ArrayCollection;
 	import mx.controls.DateField;
-	import mx.controls.Label;
 	import mx.events.FlexEvent;
 	
 	import spark.components.Button;
 	import spark.components.DropDownList;
 	import spark.components.SkinnableContainer;
 	import spark.components.TextArea;
+	
+	import util.ToDoConverter;
 
 	public class CreatorComponent extends SkinnableContainer
 	{
@@ -24,7 +26,7 @@ package view
 		public var toDoMsg:TextArea;
 		
 		[SkinPart(required="true")]
-		public var date:DateField;
+		public var dateField:DateField;
 		
 		[SkinPart(required="true")]
 		public var priority:DropDownList;
@@ -35,8 +37,8 @@ package view
 		[MessageDispatcher]
 		public var dispatcher:Function;
 		
-		/*[SkinPart(required="true")]
-		public var lblCancel:Label;*/
+		[Inject]
+		public var toDoModelLocator:ToDoModelLocator;
 		
 		public function CreatorComponent()
 		{
@@ -56,25 +58,25 @@ package view
 			{
 				btnCreate.addEventListener(MouseEvent.CLICK,onCreateToDo);
 			}
-			/*if(instance == lblCancel)
-			{
-				lblCancel.addEventListener(MouseEvent.CLICK,onCancelToDo);
-			}*/
+		}
+		
+		[Init]
+		public function init():void
+		{
+			priority.dataProvider = toDoModelLocator.priorityArray;
 		}
 		
 		private function onCreateToDo(evt:MouseEvent):void
 		{
 			/*create todo and create service*/
-			var createToDoEvent:CreateToDoEvent = new CreateToDoEvent(CreateToDoEvent.CREATE_TO_DO,true);
-			createToDoEvent.date = date.selectedDate;
-			createToDoEvent.toDoMsg = toDoMsg.text;
-			createToDoEvent.priority = 1;
-			dispatcher(createToDoEvent);
+			
+			var toDo:ToDo =ToDoConverter.convertProperites2ToDo(toDoMsg.text,new Date(),priority.selectedIndex,false,"");
+			dispatcher( new CreateToDoEvent(CreateToDoEvent.CREATE_TO_DO,toDo));
 			
 		}
 		private function onCancelToDo(evt:MouseEvent):void
 		{
-			/*clear fild*/
+			toDoMsg.text = "";
 		}
 		
 		

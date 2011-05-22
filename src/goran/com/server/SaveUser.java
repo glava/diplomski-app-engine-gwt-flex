@@ -23,13 +23,7 @@ public class SaveUser extends HttpServlet {
 		newToDoUser.username = "goran2";
 		newToDoUser.password = "123";
 
-		ToDo newToDo = new ToDo();
-		newToDo.date = new Date();
-		newToDo.priority = 1;
-		newToDo.toDoMsg = "Ovo je tekst";
-
-		newToDoUser.toDoTasks.add(newToDo);
-
+		
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		newToDoUser.setKey(KeyFactory.createKey(ToDoUser.class.getSimpleName(),
 				newToDoUser.username));

@@ -6,23 +6,39 @@
 		<![CDATA[
 			import control.CheckSessionCommand;
 			import control.CreateToDoCommand;
+			import control.DeleteToDo;
 			import control.GetAllToDoCommand;
 			import control.LoginCommand;
+			import control.LogoutCommand;
+			import control.RegisterCommand;
+			import control.SendHelpMailCommand;
+			import control.SessionCommand;
 			import control.ToDoModelLocator;
 			import control.ToDoUserLocator;
+			import control.UpdateToDoCommand;
 			
-			import events.LoginEvent;
+			import events.AuthenticateUserEvent;
+			import events.MailEvent;
 			import events.ToDoEvent;
+			
+			import util.ParsleyPopUpManager;
 		]]>
 	</fx:Script>
 
 	<fx:Declarations>
 		<parsley:Object type="{CreateToDoCommand}"/>
+		<parsley:Object type="{UpdateToDoCommand}"/>
+		<parsley:Object type="{DeleteToDo}"/>
 		<parsley:Object type="{ToDoModelLocator}"/>
 		<parsley:Object type="{ToDoUserLocator}"/>
 		<parsley:Object type="{CheckSessionCommand}"/>
+		<parsley:Object type="{SessionCommand}"/>
 		<parsley:DynamicCommand type="{GetAllToDoCommand}" id="getAllCommand" selector="{ToDoEvent.GET_ALL_TODOS}"/>
+		<parsley:DynamicCommand type="{SendHelpMailCommand}" id="sendMail" selector="{MailEvent.SEND_HELP_MAIL}"/>
+		<parsley:Object type="{ParsleyPopUpManager}"/>
 		
-		<parsley:DynamicCommand type="{LoginCommand}" selector="{LoginEvent.LOGIN_USER}"/>
+		<parsley:DynamicCommand type="{RegisterCommand}" selector="{AuthenticateUserEvent.REGISTER_USER}"/>
+		<parsley:DynamicCommand type="{LoginCommand}" selector="{AuthenticateUserEvent.LOGIN_USER}"/>
+		<parsley:DynamicCommand type="{LogoutCommand}" selector="{AuthenticateUserEvent.LOGOUT_USER}"/>
 	</fx:Declarations>
 </fx:Object>

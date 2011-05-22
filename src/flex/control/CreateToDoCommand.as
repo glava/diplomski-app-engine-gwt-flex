@@ -1,5 +1,6 @@
 package control
 {
+	import events.AlertEvent;
 	import events.CreateToDoEvent;
 	
 	import model.Priority;
@@ -17,7 +18,8 @@ package control
 		[Inject]
 		public var toDoModelLocator:ToDoModelLocator;
 		public var remoteObject:RemoteObject;
-		
+		[MessageDispatcher]
+		public var dispatcher:Function;
 		private var newToDo:ToDo;
 		
 		public function CreateToDoCommand()
@@ -29,19 +31,16 @@ package control
 		[MessageHandler(type="events.CreateToDoEvent", selector="Create.To.Do")]
 		public function createToDo(evt:CreateToDoEvent):void
 		{
-			/*TODO do this from model*/
 			var toDoUser:ToDoLaUser = new ToDoLaUser;
-			toDoUser.username = "goran";
-			
-			
-			newToDo = new ToDo(evt.toDoMsg,evt.date,evt.priority);
+			toDoUser.username = toDoModelLocator.currentUser.username;
 			remoteObject.createToDo.addEventListener(ResultEvent.RESULT,onResult);
-			remoteObject.createToDo(toDoUser,newToDo);
+			newToDo = evt.toDo;
+			remoteObject.createToDo(toDoUser,evt.toDo);
 		}
 		
 		public function onFaultEvent(evt:FaultEvent):void
 		{
-		  	
+			dispatcher(new AlertEvent(AlertEvent.SHOW_ALERT,"Neuspesno kreiranje toDo-a"));
 		}
 		public function onResult(evt:ResultEvent):void
 		{

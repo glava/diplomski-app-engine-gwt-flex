@@ -77,11 +77,15 @@
     -->
     <!--- @copy spark.components.SkinnableContainer#contentGroup -->
     <s:Group id="contentGroup" left="0" right="0" top="0" bottom="0" minWidth="0" minHeight="0">
-        <s:layout>
-            <s:HorizontalLayout verticalAlign="top"/>
-        </s:layout>
-				<view:ToDoViewComponent id="toDoView" width="600" skinClass="view.skins.ToDoViewSkin"/>
-				<view:CreatorComponent id="creatorComponent" width="300" skinClass="view.skins.CreatorComponentSkin"/>
+        <s:Rect width="100%" height="100%">
+			<s:fill>
+				<s:SolidColor color="#3c5a76"/>
+			</s:fill>
+		</s:Rect>
+		<s:HGroup verticalAlign="top" gap="0"  horizontalAlign="center" horizontalCenter="0">
+				<view:CreatorComponent id="creatorComponent" skinClass="view.skins.CreatorComponentSkin"/>
+				<view:ToDoViewComponent id="toDoView" skinClass="view.skins.ToDoViewSkin"/>
+		</s:HGroup>
     </s:Group>
 
 </s:Skin>

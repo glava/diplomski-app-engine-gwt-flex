@@ -10,31 +10,46 @@
 			import control.ToDoModelLocator;
 			import control.ToDoUserLocator;
 			
+			import events.AlertEvent;
+			import events.AuthenticateUserEvent;
 			import events.CheckSessionEvent;
-			import events.LoginEvent;
 			import events.ToDoEvent;
 			
 			import model.ToDoLaUser;
 			
 			import mx.binding.utils.BindingUtils;
+			import mx.controls.Alert;
+			import mx.core.IFlexDisplayObject;
 			import mx.managers.PopUpManager;
 			
 			import org.spicefactory.parsley.flex.FlexContextBuilder;
 			
+			import util.ParsleyPopUpManager;
+			
+			import view.components.AuthPopUpWindow;
 			import view.skins.MainContainer;
 			import view.skins.ToDoLaHeaderSkin;
 			
 			[Inject]
 			public var toDoModelLocator:ToDoModelLocator;
 			[Inject]
+			public var parsleyPopUpManager:ParsleyPopUpManager;
+			[Inject]
 			public var checkSessionCommand:CheckSessionCommand;
 			[MessageDispatcher]
 			public var dispatcher:Function;
-
+			private var popUp:IFlexDisplayObject;
+			
 			protected function application1_addedToStageHandler(event:Event):void
 			{
 				dispatchEvent(new Event("configureView", true));
 			}
+			[MessageHandler(type="events.AlertEvent", selector="Show.Alert")]
+			public function alertShow(event:AlertEvent):void
+			{
+				Alert.show(event.alertMsg,"Ups, sorry!");	
+			}		
+		
 			
 			[Init]
 			public function startUp():void
@@ -50,7 +65,18 @@
 				if(toDoUser!=null)
 				{
 					dispatcher(new ToDoEvent(ToDoEvent.GET_ALL_TODOS,toDoUser,true));
+					if(popUp!=null)
+					{
+						PopUpManager.removePopUp(popUp);
+					}
+					
 				}
+			}
+			
+			[MessageHandler(type="events.CheckSessionEvent", selector="user.not.in.session.event")]
+			public function sessionFailed(evt:CheckSessionEvent):void
+			{
+				popUp = parsleyPopUpManager.showAndCenterPopUp(AuthPopUpWindow,true);
 			}
 			
 

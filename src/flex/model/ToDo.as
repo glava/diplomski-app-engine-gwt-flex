@@ -10,13 +10,8 @@ package model
 		public var toDoMsg:String;
 		public var date:Date;
 		public var priority:int;
-		
-		public function ToDo(toDoMsg:String,date:Date = null,priority:int=0)
-		{
-			this.toDoMsg = toDoMsg;
-			this.date = date;
-			this.priority = priority;
-		}
+		public var done:Boolean;
+		public var key:String;
 		
 	}
 }

@@ -1,6 +1,9 @@
 package control
 {
+	import events.AlertEvent;
 	import events.ToDoEvent;
+	
+	import model.ToDo;
 	
 	import mx.collections.ArrayCollection;
 	import mx.rpc.AsyncToken;
@@ -22,12 +25,23 @@ package control
 		}
 		
 		public function result (toDoList:ArrayCollection) : void {
-			toDoModelLocator.toDoList = toDoList;
+			for each(var toDo:ToDo in toDoList)
+			{
+				if(toDo.done)
+				{
+					toDoModelLocator.doneList.addItem(toDo);
+				}
+				else
+				{
+					toDoModelLocator.toDoList.addItem(toDo);
+				}
+				
+			}
 			dispatcher(new ToDoEvent(ToDoEvent.ALL_TO_DO_DONE,null,true));
 		}
 		
 		public function error (fault:Fault) : void {
-			// do something with the result
+			dispatcher(new AlertEvent(AlertEvent.SHOW_ALERT,"Neuspesno dohvtanje toDo-a"));
 		}
 	}
 }

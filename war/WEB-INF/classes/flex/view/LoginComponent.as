@@ -1,6 +1,8 @@
 package view
 {
 	
+	import control.ToDoModelLocator;
+	
 	import events.LoginEvent;
 	
 	import flash.events.Event;
@@ -8,9 +10,11 @@ package view
 	
 	import model.ToDoLaUser;
 	
+	import mx.binding.utils.BindingUtils;
 	import mx.events.FlexEvent;
 	
 	import spark.components.Button;
+	import spark.components.Label;
 	import spark.components.SkinnableContainer;
 	import spark.components.TextInput;
 	
@@ -18,6 +22,9 @@ package view
 	{
 		[SkinPart(required="true")]
 		public var txtUserName:TextInput;
+		
+		[SkinPart(required="true")]
+		public var lblUsername:Label;
 	
 		[SkinPart(required="true")]
 		public var txtPasword:TextInput;
@@ -28,6 +35,9 @@ package view
 		[MessageDispatcher]
 		public var dispatcher:Function;
 		
+		[Inject]
+		public var toDoModel:ToDoModelLocator;
+		private var viewState:String = "normal";
 		public function LoginComponent()
 		{
 			super();
@@ -37,6 +47,34 @@ package view
 		public function onPrinitilize(evt:FlexEvent):void
 		{
 			dispatchEvent(new Event("configureView", true));
+			
+		}
+		
+		[Init]
+		public function init():void
+		{
+			BindingUtils.bindSetter(onUserChange,toDoModel,"currentUser");
+		}		
+	
+		override protected function getCurrentSkinState():String
+		{
+			return viewState;
+		}
+		
+		public function onUserChange(value:ToDoLaUser):void
+		{
+			if(value!=null)
+			{
+				viewState = "logedIn";
+				invalidateSkinState();
+				
+			}
+			else
+			{
+				viewState = "loggedOut";
+				invalidateSkinState();
+			}
+			
 		}
 		
 		override protected function partAdded(partName:String, instance:Object):void
@@ -45,6 +83,13 @@ package view
 			if(instance == btnLogIn)
 			{
 				btnLogIn.addEventListener(MouseEvent.CLICK,onMouseEventClick);
+			}
+			if(instance == lblUsername)
+			{
+				if(toDoModel.currentUser != null)
+				{
+					lblUsername.text = toDoModel.currentUser.username;
+				}
 			}
 			
 		}

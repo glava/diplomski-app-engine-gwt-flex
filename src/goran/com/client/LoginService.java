@@ -9,6 +9,8 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 public interface LoginService extends RemoteService{
 	
 	Boolean login(String username, String password)  throws IllegalArgumentException;
+	Boolean checkLoginStatus()  throws IllegalArgumentException;
+	Boolean register(String username, String password) throws IllegalArgumentException;
 	
 		
 }

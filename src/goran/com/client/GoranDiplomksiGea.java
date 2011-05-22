@@ -1,5 +1,6 @@
 package goran.com.client;
 
+import goran.com.client.composit.RegisterComposit;
 import goran.com.shared.FieldVerifier;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -21,6 +22,8 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class GoranDiplomksiGea implements EntryPoint {
+	
+	private RegisterComposit registry;
 	/**
 	 * The message displayed to the user when the server cannot be reached or
 	 * returns an error. new comment
@@ -43,7 +46,7 @@ public class GoranDiplomksiGea implements EntryPoint {
 		final TextBox nameField = new TextBox();
 		nameField.setText("GWT User");
 		final Label errorLabel = new Label();
-
+		registry = new RegisterComposit();	
 		// We can add style names to widgets
 		sendButton.addStyleName("sendButton");
 
@@ -52,6 +55,7 @@ public class GoranDiplomksiGea implements EntryPoint {
 		RootPanel.get("nameFieldContainer").add(nameField);
 		RootPanel.get("sendButtonContainer").add(sendButton);
 		RootPanel.get("errorLabelContainer").add(errorLabel);
+		RootPanel.get("registerContainer").add(registry);
 
 		// Focus the cursor on the name field when the app loads
 		nameField.setFocus(true);

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" >
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			private var _isLabelVisible:Boolean;
+			private var _color:uint;
+
+			public function get color():uint
+			{
+				return _color;
+			}
+
+			public function set color(value:uint):void
+			{
+				_color = value;
+				rectColor.color = value;
+			}
+
+			public function get isLabelVisible():Boolean
+			{
+				return _isLabelVisible;
+			}
+
+			public function set isLabelVisible(value:Boolean):void
+			{
+				_isLabelVisible = value;
+				decriptionLabel.visible = value;
+			}
+			
+
+		]]>
+	</fx:Script>
+	
+	<s:HGroup>
+		
+	<s:Rect width="20" height="20" bottomLeftRadiusX="45">
+		<s:fill>
+			<s:SolidColor id="rectColor" color="red"/>
+		</s:fill>
+	</s:Rect>
+		<s:Label id="decriptionLabel"/>
+	</s:HGroup>
+	
+</s:Group>

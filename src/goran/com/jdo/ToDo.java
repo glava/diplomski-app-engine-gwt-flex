@@ -17,11 +17,53 @@ public class ToDo {
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	private Key key;
 	@Persistent
-	public String toDoMsg;
+	private String toDoMsg;
 	@Persistent
-	public Date date;
+	private Date date;
 	@Persistent
-	public int priority;
+	private int priority;
+	public String getToDoMsg() {
+		return toDoMsg;
+	}
+
+	public void setToDoMsg(String toDoMsg) {
+		this.toDoMsg = toDoMsg;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public int getPriority() {
+		return priority;
+	}
+
+	public void setPriority(int priority) {
+		this.priority = priority;
+	}
+
+	public ToDoUser getUser() {
+		return user;
+	}
+
+	public void setUser(ToDoUser user) {
+		this.user = user;
+	}
+
+	@Persistent
+	private Boolean done;
+	public Boolean getDone() {
+		return done;
+	}
+
+	public void setDone(Boolean done) {
+		this.done = done;
+	}
+
 	@Persistent
 	public ToDoUser user;
 

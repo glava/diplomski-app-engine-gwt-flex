@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 addedToStage="panel1_addedToStageHandler(event)"
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="400" height="300" title="New Message">
+
+	<fx:Script>
+		<![CDATA[
+			import control.ToDoModelLocator;
+			
+			import events.MailEvent;
+			
+			import model.Mail;
+			
+			import mx.managers.PopUpManager;
+			
+			import spark.events.TextOperationEvent;
+			[Inject]
+			public var toDoModelLocator:ToDoModelLocator;
+			[Bindable]
+			public var msgString:String;
+			protected function panel1_addedToStageHandler(event:Event):void
+			{
+				dispatchEvent(new Event("configureView", true))
+				
+			}
+			
+			[MessageDispatcher]
+			public var dispatcher:Function;
+			[Init]
+			public function populateFields():void
+			{
+				msgString = "Can you help me about this: "+toDoModelLocator.currentToDo.toDoMsg;
+				
+			}
+
+			protected function btnSend_clickHandler(event:MouseEvent):void
+			{
+				var mail:Mail = new Mail();
+				mail.toDoMsg = txtMsg.text;
+				mail.toMail = txtEmail.text;
+				dispatcher(new MailEvent(MailEvent.SEND_HELP_MAIL,mail));
+			}
+
+
+			protected function txtEmail_changeHandler(event:TextOperationEvent):void
+			{
+				if(txtEmail.text.length>0 && txtEmail.text.search("@")>0)
+				{
+					btnSend.enabled = true;
+				}
+				else
+				{
+					btnSend.enabled = false;
+				}
+			}
+
+
+			protected function btnCancel_clickHandler(event:MouseEvent):void
+			{
+				PopUpManager.removePopUp(this);
+			}
+
+		]]>
+	</fx:Script>
+
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:TextInput x="99" y="10" width="289" height="32" id="txtEmail" change="txtEmail_changeHandler(event)"/>
+	<s:TextArea x="10" y="46" width="378" height="169" id="txtMsg" text="{msgString}"/>
+	<s:Button x="10" y="223" label="Cancel" id="btnCancel" click="btnCancel_clickHandler(event)"/>
+	<s:Button x="318" y="223" label="Send" id="btnSend" click="btnSend_clickHandler(event)" enabled="false"/>
+	<s:Label x="69" y="12" text="To:" height="24" width="62" fontWeight="bold" fontFamily="Arial" fontSize="16"/>
+</s:Panel>

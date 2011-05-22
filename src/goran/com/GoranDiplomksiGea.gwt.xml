@@ -13,11 +13,13 @@
   <!-- Other module inherits                                      -->
 
   <!-- Specify the app entry point class.                         -->
-  <entry-point class='goran.com.client.LoginGwt'/>
+  <entry-point class='goran.com.client.Register'/>
 
   <!-- Specify the paths for translatable code                    -->
   <source path='client'/>
   <source path='shared'/>
+  <inherits name="goran.com.GoranDiplomksiGea"/>
+  <inherits name="goran.com.GoranDiplomksiGea"/>
   <inherits name="goran.com.GoranDiplomksiGea"/>
   <inherits name="goran.com.GoranDiplomksiGea"/>
   <inherits name="goran.com.GoranDiplomksiGea"/>
